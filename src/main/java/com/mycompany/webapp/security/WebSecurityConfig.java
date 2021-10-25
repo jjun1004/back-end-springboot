@@ -48,6 +48,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/board/**").authenticated()
 			.antMatchers("/**").permitAll();
 		
+		//세션 비활성화
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	
+		//JwtCheckFilter 추가
+		JwtCheckFilter jwtCheckFilter = new JwtCheckFilter();
+		http.addFilterBefore(jwtCheckFilter, UsernamePasswordAuthenticationFilter.class);
+		
+		//CORS 설정 활성화
+		// corsConfigureationSource를 관리객체로 찾기 때문에 관리객체로 만들어야 함(아래). 
+		http.cors();
 	}	
 	
 	@Override
@@ -94,6 +104,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return roleHierarchyImpl;
 	}
 	
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration conf = new CorsConfiguration();
+		//모든 요청 사이트 허용
+		conf.addAllowedOrigin("*");
+		//모든 요청 방식 허용- rest api는 다 허용해야 맞음
+		conf.addAllowedMethod("*");
+		// 모든 요청 헤더 허용
+		conf.addAllowedHeader("*");
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", conf);
+		return source;
+	}
 }
  
  
