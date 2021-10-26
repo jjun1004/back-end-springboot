@@ -22,7 +22,7 @@ public class JwtUtil {
 						.setHeaderParam("alg", "HS256") //alg는 알고리즘
 						.setHeaderParam("typ", "JWT")
 						
-						//토근의 유효기간
+						//토큰의 유효기간
 						.setExpiration(new Date(new Date().getTime() + 1000*60*60*24)) // 1은 1000분의 1초이기 때문에 1년.
 						
 						//페이로드 설정

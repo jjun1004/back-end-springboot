@@ -114,8 +114,8 @@ public class TestRestController {
 	      return map;
 	   }
 	   
-	   //authorization엔 bearer "토큰값" 이기 때문에 b부터 7글자를 제거함(띄어쓰기포함)
-	   @RequestMapping("sendAuth")
+	   //authorization가 bearer+ "토큰값" 이기 때문에 b부터 7글자를 제거함(bearer 6자  + 띄어쓰기 1자)
+	   @RequestMapping("/sendAuth")
 	   public Map<String, String> sendAuth(@RequestHeader("Authorization") String authorization) {
 	      log.info("실행");
 	      log.info(authorization);
