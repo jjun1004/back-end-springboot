@@ -84,7 +84,7 @@ public class MemberController {
 		log.info(authority);
 		Map<String, String> map = new HashMap<>();
 		map.put("result", "success");
-		map.put("mid", "mid");
+		map.put("mid", mid);
 		map.put("jwt", JwtUtil.createToken(mid, authority));
 		return map;
 	}

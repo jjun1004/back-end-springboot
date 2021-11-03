@@ -75,8 +75,8 @@ public class BoardController {
 			board.setBattachsname(new Date().getTime() + "-" + mf.getOriginalFilename());
 			board.setBattachtype(mf.getContentType());
 			try {
-			File file = new File("C:/hyndai_it&e/upload_files/" + board.getBattachsname());
-			mf.transferTo(file);
+				File file = new File("C:/hyndai_itne/upload_files/" + board.getBattachsname());
+				mf.transferTo(file);
 			} catch(Exception e) {}
 			// 실행이 됐다면 battachoname이 있기 때문에 board.xml에서 battachoname != null 부분 실행. (동적쿼리)
 		}
@@ -91,16 +91,17 @@ public class BoardController {
 	@PostMapping("/update")
 	public Board update(Board board) {
 		log.info("실행");
-		if(board.getBattach() != null && !board.getBattach().isEmpty()) {
+		if (board.getBattach() != null && !board.getBattach().isEmpty()) {
 			MultipartFile mf = board.getBattach();
 			board.setBattachoname(mf.getOriginalFilename());
 			board.setBattachsname(new Date().getTime() + "-" + mf.getOriginalFilename());
 			board.setBattachtype(mf.getContentType());
 			try {
-				File file = new File("C:/hyndai_it&e/upload_files/" + board.getBattachsname());
+				File file = new File("C:/hyndai_itne/upload_files/" + board.getBattachsname());
 				mf.transferTo(file);
-			} catch(Exception e) {}
+			} catch (Exception e) {
 			// 실행이 됐다면 battachoname이 있기 때문에 board.xml에서 battachoname != null 부분 실행. (동적쿼리)
+			}
 		}
 		boardService.updateBoard(board); // 이 이후엔 파라미터에 bno가 들어가 있음
 		board = boardService.getBoard(board.getBno(), false); // false로 주는 이유 사용자가 보고 싶어서 게시물 보기를 누른 것이 아닌 응답으로 제공할 목적이기 때문. 조회수 안올리기.
@@ -135,7 +136,7 @@ public class BoardController {
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + battachoname + "\";");
 			response.setContentType(battachtype);
 			
-			InputStream is = new FileInputStream("C:/hyndai_it&e/upload_files/" + battachsname);
+			InputStream is = new FileInputStream("C:/hyndai_itne/upload_files/" + battachsname);
 			OutputStream os = response.getOutputStream();
 			FileCopyUtils.copy(is, os);
 			is.close();

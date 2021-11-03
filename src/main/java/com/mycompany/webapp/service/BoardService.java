@@ -29,7 +29,7 @@ public class BoardService {
 	
 	public Board getBoard(int bno, boolean hit) {
 		log.info("실행");
-		if(hit) {
+		if (hit) {
 			boardDao.updateBhitcount(bno);
 		}
 		return boardDao.selectByBno(bno);

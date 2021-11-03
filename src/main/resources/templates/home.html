@@ -419,7 +419,6 @@
 					const bno = $("#downloadAttachForm [name=bno]").val();
 					const url = "[(@{/board/battach/})]" + bno;
 					const jwt = "jwt=" + sessionStorage.getItem("jwt");
-					//<img src="http://localhost/board/battach/2347?jwt=xxx">
 					$("#attachImg").attr("src", `${url}?${jwt}`);
 				}
 			</script>
